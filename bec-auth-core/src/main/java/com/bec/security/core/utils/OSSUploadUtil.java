@@ -377,7 +377,7 @@ public class OSSUploadUtil implements InitializingBean {
 		return contentType;
 	}
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		//String bucket="bec-test";
 		//创建 Bucket
 		//createBucket("bec-test");
@@ -388,6 +388,6 @@ public class OSSUploadUtil implements InitializingBean {
 		//logger.trace( uploadFile(new File("C:\\Users\\surui\\Desktop\\框架\\ff\\index.html"),bucket,"file/html/"));
 		//logger.trace(deleteFile("https://bec-test123.oss-cn-hangzhou.aliyuncs.com/file/html/index.html")+"");
 
-	}
+	//}
 
 }
