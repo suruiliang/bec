@@ -1,0 +1,55 @@
+package com.bec.security.core.validate.code;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import com.bec.security.core.properties.SecurityProperties;
+import com.bec.security.core.validate.code.image.DefaultImageCodeGenerator;
+import com.bec.security.core.validate.code.image.ImageCodeGenerator;
+import com.bec.security.core.validate.code.impl.RedisValidateCodeRepository;
+//import com.bec.security.core.validate.code.impl.SessionValdateCodeRepository;
+import com.bec.security.core.validate.code.sms.DefaultSmsCodeGenerator;
+import com.bec.security.core.validate.code.sms.DefaultSmsCodeSender;
+import com.bec.security.core.validate.code.sms.SmsCodeGenerator;
+import com.bec.security.core.validate.code.sms.SmsCodeSender;
+
+
+@Configuration
+public class ValidateCodeBeanConfig {
+	@Autowired
+	private SecurityProperties securityProperties;
+	@Autowired
+	private RedisTemplate<Object, Object> redisTemplate;
+	
+	@Bean
+	@ConditionalOnMissingBean(ImageCodeGenerator.class)
+	public ValidateCodeGenerator imageCodeGenerator(){
+		DefaultImageCodeGenerator codeGenerator=new DefaultImageCodeGenerator();
+		codeGenerator.setSecurityProperties(securityProperties);
+		return codeGenerator;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(SmsCodeGenerator.class)
+	public ValidateCodeGenerator smsCodeGenerator(){
+		DefaultSmsCodeGenerator codeGenerator=new DefaultSmsCodeGenerator();
+		codeGenerator.setSecurityProperties(securityProperties);
+		return codeGenerator;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(SmsCodeSender.class)
+	public SmsCodeSender smsCodeSender(){
+		return new DefaultSmsCodeSender();
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(ValidateCodeRepository.class)
+	public ValidateCodeRepository validateCodeRepository(){
+		return new RedisValidateCodeRepository(redisTemplate);
+	}
+
+}
