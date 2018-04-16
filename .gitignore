@@ -1,37 +1,42 @@
-
-# Operating System Files  
-  
-*.DS_Store  
-Thumbs.db  
-*.sw?  
-.#*  
-*#  
-*~  
-*.sublime-*  
-  
-# Build Artifacts  
-  
-.gradle/  
-build/  
-target/  
-bin/  
-dependency-reduced-pom.xml  
-  
-# Eclipse Project Files  
-  
-.classpath  
-.project  
-.settings/  
-  
-# IntelliJ IDEA Files  
-  
-*.iml  
-*.ipr  
-*.iws  
-*.idea 
-/target/
+﻿target/
 bin/
-/.classpath
-/.project
-/.settings
-/.externalToolBuilders
+!.mvn/wrapper/maven-wrapper.jar
+.git
+.mvn
+.externalToolBuilders
+.gradle
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+.DS_Store
+/bec-auth-core/.project
+/bec-auth-core/.settings
+/bec-auth-core/target
+/bec-auth-core/.classpath
+/bec-auth-demo/.springBeans
+/bec-auth-demo/.settings
+/bec-auth-demo/target
+/bec-auth-demo/.classpath
+/bec-auth-demo/.project
+/bec-parent/.settings
+/bec-parent/.project
