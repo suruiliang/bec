@@ -3,10 +3,15 @@ package com.bec.security.demo.security.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
+
+import com.bec.security.demo.mapper.AuthClientDetailsMapper;
+import com.bec.security.demo.model.AuthClientDetails;
 
 
 /**
@@ -16,22 +21,36 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 * @Description 类描述
 */
 public class BecClientDetailsService implements  ClientDetailsService{
+	@Autowired
+	private AuthClientDetailsMapper authClientDetailsMapper;
 
 	@Override
 	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
+		AuthClientDetails authClientDetails=authClientDetailsMapper.selectByPrimaryKey(clientId);
+		if (authClientDetails==null) {
+			throw new ClientRegistrationException("client not exists");
+		}
+		return getClient(authClientDetails);
+	}
+
+	private BaseClientDetails getClient(AuthClientDetails authClientDetails) {
 		BaseClientDetails clients=new BaseClientDetails();
-		clients.setClientId(clientId);
-		clients.setClientSecret(clientId+"secret");
-		clients.setAccessTokenValiditySeconds(7200);
+		clients.setClientId(authClientDetails.getClientId());
+		clients.setClientSecret(authClientDetails.getClientSecret());
+		clients.setAccessTokenValiditySeconds(authClientDetails.getAccessTokenValiditySeconds());
+		clients.setRefreshTokenValiditySeconds(authClientDetails.getRefreshTokenValiditySeconds());
 		List<String> authorizedGrantTypes=new ArrayList<String>();
-		authorizedGrantTypes.add("refresh_token");
-		authorizedGrantTypes.add("password");
+		String[] authorizedGrantTypesArray=StringUtils.split(authClientDetails.getAuthorizedGrantTypes(),",");
+		for (String authorizedGrantType : authorizedGrantTypesArray) {
+			authorizedGrantTypes.add(authorizedGrantType);
+		}
 		clients.setAuthorizedGrantTypes(authorizedGrantTypes);
-		List<String> autoApproveScopes=new ArrayList<String>();
-		autoApproveScopes.add("all");
-		autoApproveScopes.add("read");
-		autoApproveScopes.add("write");
-		clients.setAutoApproveScopes(autoApproveScopes);
+		List<String> scopes=new ArrayList<String>();
+		String[] scopesArray=StringUtils.split(authClientDetails.getScope(),",");
+		for (String scope : scopesArray) {
+			scopes.add(scope);
+		}
+		clients.setScope(scopes);
 		return clients;
 	}
 

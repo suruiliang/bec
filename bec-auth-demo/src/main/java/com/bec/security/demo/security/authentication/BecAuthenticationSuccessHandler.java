@@ -71,7 +71,7 @@ public class BecAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 		OAuth2Authentication oAuth2Authentication=new OAuth2Authentication(oAuth2Request, authentication);
 		
 		OAuth2AccessToken token=authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
-		
+		//TODO 登录日志
 		response.setContentType("application/json;charset=UTF-8");
 //		response.getWriter().write(objectMapper.writeValueAsString(token));
 		response.getWriter().write(objectMapper.writeValueAsString(ResultUtil.successO(token)));

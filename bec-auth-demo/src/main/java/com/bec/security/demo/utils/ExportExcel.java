@@ -1,4 +1,4 @@
-package utils;
+package com.bec.security.demo.utils;
 
 
 import java.io.BufferedInputStream;

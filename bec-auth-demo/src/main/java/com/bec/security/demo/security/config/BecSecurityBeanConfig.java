@@ -1,7 +1,6 @@
 package com.bec.security.demo.security.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,7 +9,6 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 
-import com.bec.security.core.properties.SecurityProperties;
 import com.bec.security.demo.security.service.BecClientDetailsService;
 import com.bec.security.demo.security.service.BecSaltSource;
 import com.bec.security.demo.security.service.BecUserDetailsService;
@@ -25,7 +23,6 @@ import com.bec.security.demo.security.service.ShiroHashPasswordEncoder;
 */
 @SuppressWarnings("deprecation")
 @Configuration
-@EnableConfigurationProperties(SecurityProperties.class)
 public class BecSecurityBeanConfig {
 	
 	@Bean
