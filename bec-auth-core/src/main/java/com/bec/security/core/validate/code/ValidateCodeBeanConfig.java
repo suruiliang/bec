@@ -74,13 +74,13 @@ public class ValidateCodeBeanConfig {
 		return new SavedRequestAwareAuthenticationSuccessHandler();
 	}
 	
-	/*@Bean
+	@Bean
 	@ConditionalOnMissingBean(UserDetailsService.class)
 	public UserDetailsService userDetailsService() {
 		return new DefaultUserDetailsService();
 	}
 	
-	@Bean
+	/*@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}*/
