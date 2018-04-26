@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bec.security.core.exception.BecExceptionEnum;
 import com.bec.security.core.support.Result;
-import com.bec.security.core.utils.ResultUtil;
 import com.bec.security.core.utils.OSSUploadUtil;
+import com.bec.security.core.utils.ResultUtil;
 
 /**
  * @author suruiliang

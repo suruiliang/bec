@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.bec.security.core.exception.EnumType;
 import com.bec.security.core.support.Result;
+import com.bec.security.core.support.ResultList;
+import com.bec.security.core.support.ResultObj;
 import com.github.pagehelper.PageInfo;
 
 /**
@@ -14,14 +16,20 @@ import com.github.pagehelper.PageInfo;
 */
 public class ResultUtil {
 	public static <T> Result<T> successO(T obj) {
-		Result<T> result=new Result<>();
+		if (obj==null) {
+			Result<T> result=new Result<>();
+			result.setCode(200);
+			result.setMsg("成功");
+			return result;
+		}
+		ResultObj<T> result=new ResultObj<>();
 		result.setCode(200);
 		result.setObj(obj);
 		result.setMsg("成功");
 		return result;
 	}
 	public static <T> Result<T> successL(List<T> list) {
-		Result<T> result=new Result<>();
+		ResultList<T> result=new ResultList<>();
 		result.setCode(200);
 		result.setList(list);
 		result.setPageInfo(new PageInfo<T>(list));
