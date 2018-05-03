@@ -14,5 +14,7 @@ import lombok.Setter;
 public class Result<T> {
 	private Integer code;
 	private String msg;
+	private String sign;
+	private String serialNo;
 	private T data;
 }
