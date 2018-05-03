@@ -1,7 +1,5 @@
 package com.bec.security.core.support;
 
-import com.github.pagehelper.PageInfo;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +14,5 @@ import lombok.Setter;
 public class Result<T> {
 	private Integer code;
 	private String msg;
-	public void setPageInfo(PageInfo<T> pageInfo) {};
+	private T data;
 }

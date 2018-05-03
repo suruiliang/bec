@@ -30,7 +30,7 @@ public class OssController {
 	
 	@GetMapping("/policy")
 	public Result<?> policy() throws UnsupportedEncodingException {
-		return ResultUtil.successO(OSSUploadUtil.objectPolicy());
+		return ResultUtil.success(OSSUploadUtil.objectPolicy());
 	}
 	
 	@PostMapping(value="/upload")
@@ -38,12 +38,12 @@ public class OssController {
 		if(file.isEmpty()) {
 			return ResultUtil.error(BecExceptionEnum.UNKNOWN_EXCEPTION);
 		}
-		return ResultUtil.successO(OSSUploadUtil.uploadFile(file.getInputStream(), OSSUploadUtil.BUCKET, OSSUploadUtil.DIR+"image/",file.getOriginalFilename()));
+		return ResultUtil.success(OSSUploadUtil.uploadFile(file.getInputStream(), OSSUploadUtil.BUCKET, OSSUploadUtil.DIR+"image/",file.getOriginalFilename()));
 	}
 	
 	@DeleteMapping(value="/remove")
 	public Result<String> remove(HttpServletRequest request,HttpServletResponse response,String fileUrl) {
 		boolean flag=OSSUploadUtil.deleteFile(fileUrl);
-		return ResultUtil.successO(fileUrl+":删除"+(flag?"成功！":"失败！"));
+		return ResultUtil.success(fileUrl+":删除"+(flag?"成功！":"失败！"));
 	}
 }

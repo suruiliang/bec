@@ -4,35 +4,23 @@ import java.util.List;
 
 import com.bec.security.core.exception.EnumType;
 import com.bec.security.core.support.Result;
-import com.bec.security.core.support.ResultList;
-import com.bec.security.core.support.ResultObj;
 import com.github.pagehelper.PageInfo;
 
 /**
-* @author suruiliang
-* @version 创建时间：2018年4月16日 下午1:10:42
-* @ClassName 类名称
-* @Description 类描述
-*/
+ * @author suruiliang
+ * @version 创建时间：2018年4月16日 下午1:10:42
+ * @ClassName 类名称
+ * @Description 类描述
+ */
 public class ResultUtil {
-	public static <T> Result<T> successO(T obj) {
-		if (obj==null) {
-			Result<T> result=new Result<>();
-			result.setCode(200);
-			result.setMsg("成功");
-			return result;
+	@SuppressWarnings("unchecked")
+	public static <T> Result<T> success(T data) {
+		Result<T> result=new Result<>();
+		result.setCode(200);
+		result.setData(data);
+		if (data instanceof List<?>) {
+			result.setData((T)new PageInfo<T>((List<T>)data));
 		}
-		ResultObj<T> result=new ResultObj<>();
-		result.setCode(200);
-		result.setObj(obj);
-		result.setMsg("成功");
-		return result;
-	}
-	public static <T> Result<T> successL(List<T> list) {
-		ResultList<T> result=new ResultList<>();
-		result.setCode(200);
-		result.setList(list);
-		result.setPageInfo(new PageInfo<T>(list));
 		result.setMsg("成功");
 		return result;
 	}

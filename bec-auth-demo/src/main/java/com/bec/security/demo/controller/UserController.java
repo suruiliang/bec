@@ -26,14 +26,14 @@ public class UserController {
 	public Result<Authentication> me(){
 		Authentication authentication=SecurityUtils.getAuthentication();
 		logger.info("authentication="+authentication.getPrincipal());
-		return ResultUtil.successO(authentication);
+		return ResultUtil.success(authentication);
 	}
 	@GetMapping(value = "/list")
-	public Result<AuthUser> list(AuthUser authUser,Integer pageNum,Integer pageSize){
+	public Result<?> list(AuthUser authUser,Integer pageNum,Integer pageSize){
 		if(pageNum!=null&&pageSize!=null) {
 			PageHelper.startPage(pageNum, pageSize);
 		}
-		return ResultUtil.successL(authUserService.selectAuthUser(authUser));
+		return ResultUtil.success(authUserService.selectAuthUser(authUser));
 	}
 	
 }

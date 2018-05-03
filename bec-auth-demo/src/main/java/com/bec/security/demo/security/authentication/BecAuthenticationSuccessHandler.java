@@ -74,7 +74,7 @@ public class BecAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 		//TODO 登录日志
 		response.setContentType("application/json;charset=UTF-8");
 //		response.getWriter().write(objectMapper.writeValueAsString(token));
-		response.getWriter().write(objectMapper.writeValueAsString(ResultUtil.successO(token)));
+		response.getWriter().write(objectMapper.writeValueAsString(ResultUtil.success(token)));
 
 	}
 	private String[] extractAndDecodeHeader(String header, HttpServletRequest request)
