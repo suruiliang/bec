@@ -12,15 +12,14 @@ import com.bec.security.core.utils.ResultUtil;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-	@ExceptionHandler(BecException.class)
-	@ResponseBody
-	public Result<?> handleBecException(BecException ex) {
-		return ResultUtil.error(ex.getCode(),ex.getMessage());
-	}
 	
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public Result<?> handleException(Exception ex) {
+		ex.printStackTrace();
+		if (ex instanceof BecException) {
+			return ResultUtil.error(((BecException)ex).getCode(),ex.getMessage());
+		}
 		return ResultUtil.error(500,ex.getMessage());
 	}
 }
