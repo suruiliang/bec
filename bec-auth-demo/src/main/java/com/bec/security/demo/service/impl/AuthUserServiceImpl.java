@@ -20,6 +20,11 @@ public class AuthUserServiceImpl implements AuthUserService {
 		return authUserMapper.selectAuthUser(authUser);
 	}
 
+	@Override
+	public AuthUser selectAuthUserByUserName(String userName) {
+		return authUserMapper.selectAuthUserByUsername(userName);
+	}
+
     
 
 }

@@ -6,4 +6,6 @@ import com.bec.security.demo.model.AuthUser;
 
 public interface AuthUserService {
 	public List<AuthUser> selectAuthUser(AuthUser authUser);
+
+	public AuthUser selectAuthUserByUserName(String userName);
 }
